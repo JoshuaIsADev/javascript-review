@@ -147,7 +147,8 @@ function getBook(id) {
 const book = getBook(1);
 console.log(book);
 
-const { title, publicationDate, author, genres, hasMovieAdaptation } = book;
+const { title, publicationDate, author, genres, hasMovieAdaptation, pages } =
+  book;
 
 console.log(genres);
 
@@ -178,3 +179,20 @@ const updatedSpreadBook = {
   pages: 1210, // you can overwrite properties because it comes after spread out original object
 }; // add ... to take out each item in an object and "spreads" them
 updatedSpreadBook;
+
+//TERNARARIES INSTEAD OF IF ELSE
+// if else is a statement and does not return a value. Terneraries returns a value
+// pages > 1000 //condition
+//   ? 'over a thousand' // result if condition is true
+//   : 'less than 1000'; //result if condition is false
+
+const pagesRange = pages > 1000 ? 'over a thousand' : 'less than 1000';
+console.log(pagesRange);
+
+//ARROW FUNCTION
+// function getYear(str) {
+//   return str.split('-')[0];
+// }
+
+const getYear = (str) => str.split('-')[0];
+console.log(getYear(publicationDate));
