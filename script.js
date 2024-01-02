@@ -144,55 +144,64 @@ function getBook(id) {
 }
 
 //DESTRUCTURING when we need data out of an object or an array
-const book = getBook(1);
+const book = getBook(2);
 console.log(book);
 
-const { title, publicationDate, author, genres, hasMovieAdaptation, pages } =
-  book;
+///////////////////////////////
 
-console.log(genres);
+const {
+  id,
+  title,
+  publicationDate,
+  author,
+  genres,
+  hasMovieAdaptation,
+  pages,
+  translations,
+} = book;
+console.log(translations);
 
-const genre1 = genres[0];
+//REST OPERATOR)
+const [primaryGenre, secondaryGenre, ...otherGenre] = genres;
+console.log(primaryGenre, secondaryGenre, ...otherGenre);
 
-console.log(genre1);
+//SPREAD OPERATOR
+const newGenres = [...genres, 'epic fantasy'];
+const newGenres2 = ['epic fantasy', ...genres];
+console.log(newGenres2);
 
-const [genre1b, genre2, genre3] = genres;
-
-console.log(genre1b, genre2, genre3);
-
-//REST OPERATOR when we need the rest of the data
-const [genre1c, genre2c, genre3c, ...otherGenres] = genres;
-
-console.log(otherGenres);
-
-//SPREAD OPERATOR take all values out of an array and place them one by one in a new array
-const newGenres = [genres, 'epic fantasy']; // returns original array and adds new object last, which is not what we want
-newGenres;
-const newSpreadGenres = [...genres, 'epic fantasy']; // add ... to take out each item in an array and "spreads" them
-newSpreadGenres;
-
-const updatedBook = { book, moviePublicationDate: '2001-12-19' }; // returns original object and adds new object last, which is not what we want
-updatedBook;
-const updatedSpreadBook = {
+const updatedBook = {
   ...book,
   moviePublicationDate: '2001-12-19',
-  pages: 1210, // you can overwrite properties because it comes after spread out original object
-}; // add ... to take out each item in an object and "spreads" them
-updatedSpreadBook;
+  pages: 6666,
+};
+console.log(updatedBook);
 
-//TERNARARIES INSTEAD OF IF ELSE
-// if else is a statement and does not return a value. Terneraries returns a value
-// pages > 1000 //condition
-//   ? 'over a thousand' // result if condition is true
-//   : 'less than 1000'; //result if condition is false
+//TERNARARY OPERATOR
+const pagesRange = pages > 1000 ? 'over a thousand' : 'less than a thousand';
+console.log(`The book has ${pagesRange} pages`);
 
-const pagesRange = pages > 1000 ? 'over a thousand' : 'less than 1000';
-console.log(pagesRange);
+//FUNCTIONS
+function getYear(str) {
+  return str.split('-')[0];
+}
+console.log(getYear(publicationDate));
 
 //ARROW FUNCTION
-// function getYear(str) {
-//   return str.split('-')[0];
-// }
+const getYearArrow = (str) => str.split('-')[0];
+console.log(getYearArrow(publicationDate));
 
-const getYear = (str) => str.split('-')[0];
-console.log(getYear(publicationDate));
+//SHORT CIRCUITING
+console.log(true && 'Some string');
+console.log(false && 'Some string');
+console.log(hasMovieAdaptation && 'This book has a movie');
+console.log(0 && 'Some string');
+
+console.log(true || 'Some string');
+console.log(false || 'Some string');
+console.log(book.translations.spanish);
+const spanishTranslation = book.translations.spanish || 'not translated';
+console.log(spanishTranslation);
+
+const count = book.reviews.librarything.reviewsCount ?? 'no data';
+console.log(count);
