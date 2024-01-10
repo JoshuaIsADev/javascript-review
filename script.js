@@ -143,6 +143,8 @@ function getBook(id) {
   return data.find((d) => d.id === id);
 }
 
+/*
+
 //DESTRUCTURING when we need data out of an object or an array
 const book = getBook(2);
 console.log(book);
@@ -214,3 +216,28 @@ function getTotalReviewCount(book) {
 }
 
 console.log(getTotalReviewCount(book));
+
+*/
+
+//ARRAY MAP METHOD functional array methods do not mutate, they return new array
+const books = getBooks();
+
+const x = [1, 2, 3, 4, 5, 6].map((el) => el * 2);
+console.log(x);
+
+const titles = books.map((book) => book.title);
+console.log(titles);
+
+function getTotalReviewCount(book) {
+  const goodreads = book.reviews?.goodreads?.reviewsCount ?? 0;
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+  return goodreads + librarything;
+}
+
+const essentialData = books.map((book) => ({
+  title: book.title,
+  author: book.author,
+  reviewCount: getTotalReviewCount(book),
+}));
+
+console.log(essentialData);
