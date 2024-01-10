@@ -205,3 +205,12 @@ console.log(spanishTranslation);
 
 const count = book.reviews.librarything.reviewsCount ?? 'no data';
 console.log(count);
+
+//OPTIONAL CHAINING
+function getTotalReviewCount(book) {
+  const goodreads = book.reviews?.goodreads?.reviewsCount ?? 0;
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+  return goodreads + librarything;
+}
+
+console.log(getTotalReviewCount(book));
